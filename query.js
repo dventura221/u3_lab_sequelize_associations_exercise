@@ -6,8 +6,8 @@ function stringify(data) {
 
 const getAllUsers = async () => {
   try {
-    // execute query here
-    // Return the result
+    const results = await User.findAll()
+    stringify(results)
   } catch (error) {
     console.log(error)
     return false
@@ -16,8 +16,10 @@ const getAllUsers = async () => {
 
 const articlesWithCreator = async () => {
   try {
-    // execute query here
-    // Return the result
+    const articles = await Article.findAll({
+      include: [{ model: User, as: 'creator' }]
+    })
+    stringify(articles)
   } catch (error) {
     console.log(error)
     return false

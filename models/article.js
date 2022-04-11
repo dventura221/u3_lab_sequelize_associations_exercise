@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Article.belongsTo(models.User, { as: 'creator', foreignKey: 'creatorId' })
     }
   }
   Article.init(
@@ -17,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       content: DataTypes.TEXT,
       creatorId: {
         type: DataTypes.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: 'users',
           key: 'id'
